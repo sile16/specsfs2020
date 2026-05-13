@@ -26,4 +26,8 @@ EOF
 done
 systemctl daemon-reexec
 
+for b in /sys/class/net/bond*/bonding/xmit_hash_policy; do
+  [ -e "$b" ] && echo layer3+4 > "$b"
+done
+
 echo "$(hostname): tuned"
