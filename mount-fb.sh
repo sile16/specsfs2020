@@ -1,12 +1,13 @@
 #!/bin/bash
 set -euo pipefail
 
-src="${1:?usage: mount-fb.sh server:/export base-mountpoint [count=1]}"
-base="${2:?usage: mount-fb.sh server:/export base-mountpoint [count=1]}"
-n="${3:-1}"
+base="${1:?usage: mount-fb.sh base-mountpoint src1 [src2 ...]}"
+shift
 opts="vers=3,hard,proto=tcp,nconnect=16,nosharecache"
 
-for i in $(seq 1 "$n"); do
+i=0
+for src in "$@"; do
+  i=$((i + 1))
   dst="${base}-${i}"
   mkdir -p "$dst"
   if mountpoint -q "$dst"; then
