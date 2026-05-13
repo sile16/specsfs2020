@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-out="${1:?usage: monitor.sh out-dir [interval=5]}"
+out="${1:-/home/specsfs2020/monitor}"
 iv="${2:-5}"
 mkdir -p "$out"
 h=$(hostname)
