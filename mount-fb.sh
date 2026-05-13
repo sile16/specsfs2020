@@ -9,7 +9,12 @@ opts="vers=3,rsize=1048576,wsize=1048576,hard,proto=tcp,nconnect=16,nosharecache
 for i in $(seq 1 "$n"); do
   dst="${base}-${i}"
   mkdir -p "$dst"
-  mountpoint -q "$dst" && umount "$dst"
+  if mountpoint -q "$dst"; then
+    fuser -k -9 -m "$dst" 2>/dev/null || true
+    sleep 1
+    umount -fl "$dst"
+  fi
   mount -t nfs -o "$opts" "$src" "$dst"
+  mountpoint -q "$dst" || { echo "$(hostname): FAILED to mount $dst" >&2; exit 1; }
   echo "$(hostname): $src on $dst"
 done
