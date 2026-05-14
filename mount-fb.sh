@@ -3,7 +3,7 @@ set -euo pipefail
 
 base="${1:?usage: mount-fb.sh base-mountpoint src1 [src2 ...]}"
 shift
-opts="vers=3,hard,proto=tcp,nconnect=16,nosharecache"
+opts="vers=3,hard,proto=tcp,nconnect=16"
 
 i=0
 for src in "$@"; do
