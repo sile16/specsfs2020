@@ -21,4 +21,10 @@ echo $! > "$out/${h}.pid.sar-mem"
 (while :; do date -u +%FT%TZ; ss -tim; echo ---; sleep "$iv"; done) > "$out/${h}.ss" 2>&1 &
 echo $! > "$out/${h}.pid.ss"
 
+(while :; do date -u +%FT%TZ; cat /proc/net/sockstat; echo ---; sleep "$iv"; done) > "$out/${h}.sockstat" 2>&1 &
+echo $! > "$out/${h}.pid.sockstat"
+
+(while :; do date -u +%FT%TZ; nfsstat -c; echo ---; sleep "$iv"; done) > "$out/${h}.nfsstat" 2>&1 &
+echo $! > "$out/${h}.pid.nfsstat"
+
 echo "$h: monitor started -> $out"
