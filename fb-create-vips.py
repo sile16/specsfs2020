@@ -18,7 +18,7 @@ for n in range(start, end + 1):
         address=f"{prefix}{n}",
         services=["data"],
         type="vip",
-        subnet=fb.Reference(name=subnet),
+        subnet={"name": subnet},
     )
     r = c.post_network_interfaces(names=[name], network_interface=body)
     print(name, r.status_code, getattr(r, "errors", None) or "ok")
