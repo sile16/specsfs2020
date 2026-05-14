@@ -1,0 +1,2 @@
+#!/bin/sh
+exec numactl --cpunodebind=0 --membind=0 /mnt/specsfs2020-1/netmist.bin "$@"
